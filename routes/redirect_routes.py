@@ -37,7 +37,7 @@ def redirect_post(req, action, mode):
 
     resp = action(name, slug if slug != "" else None, url)
 
-    return redirect("/") if resp else render_template(
+    return redirect("/admin") if resp else render_template(
         "pages/edit.html",
         mode=mode,
         redirection={
@@ -127,7 +127,9 @@ def route_redirect(slug):
         return make_response("Redirect not found.", 404)
 
     redirect_obj.download_request(
-        request.remote_addr,
+        # request.remote_addr,
+        request.headers.get("X-Forwarded-For") or request.headers.get("Forwarded") or
+        (request.remote_addr if not request.remote_addr.startswith("127.") else "unknown"),
         request.headers.get("User-Agent"),
         request.referrer or "",
         ",".join([f"{k}={v}" for k, v in request.args.items()]) or ""

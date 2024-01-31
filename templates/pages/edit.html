@@ -32,7 +32,7 @@
                     value="{{ redirection.slug if redirection else "" }}">
             </label>
 
-            <a href="/" class="btn btn-danger">{{ "Back" if mode == "new" else "Cancel" }}</a>
+            <a href="/admin" class="btn btn-danger">{{ "Back" if mode == "new" else "Cancel" }}</a>
             {% if redirection %}
                 <button type="reset" class="btn btn-warning">Reset</button>
             {% endif %}

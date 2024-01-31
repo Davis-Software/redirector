@@ -7,7 +7,7 @@ from utils.request_codes import RequestCode
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    redirection = request.args.get("jump") or "/"
+    redirection = request.args.get("jump") or "/admin"
 
     if session.get("logged_in"):
         return redirect(redirection)
