@@ -1,0 +1,23 @@
+body{
+    background-color: #222;
+}
+.form-control{
+    transition: all .3s;
+    background-color: #272b30;
+    border: var(--bs-border-width) solid #222;
+    color: #fff;
+}
+.form-control::placeholder{
+    color: #aaa;
+}
+.form-control:focus{
+    background-color: rgb(57, 65, 72, .6);
+    color: #fff;
+}
+.form-control:disabled{
+    background-color: rgb(57, 65, 72, .9);
+}
+.container{
+    margin-top: 30vh;
+    transition: all .3s;
+}

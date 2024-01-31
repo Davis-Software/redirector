@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ app_name }}{% block subtitle %}{% endblock %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#375a7f">
+
+    <link rel="stylesheet" href="/static/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bases/base_style.css">
+
+    <script src="/static/bootstrap/bootstrap.bundle.min.js" defer></script>
+
+    {% block base_head %}{% endblock %}
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block body %}{% endblock %}
+
+    {% block footer %}
+        {% include "components/footer.html" %}
+    {% endblock %}
+</body>
+</html>

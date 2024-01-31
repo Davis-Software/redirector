@@ -1,0 +1,42 @@
+{% extends "bases/main_base.html" %}
+
+{% block subtitle %} - {{ "New" if mode == "new" else "Edit" }} Redirection{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+    <div class="main-container container pt-5 text-white">
+        <h1>{{ "New" if mode == "new" else "Edit" }} Redirection</h1>
+
+        {% if alert %}
+            <div class="alert alert-{{ alert.type }} alert-dismissible fade show" role="alert">
+                {{ alert.message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+
+        <form class="mt-5" method="post">
+            <label class="w-100 mb-3">
+                Name*:
+                <input name="name" class="form-control" type="text" placeholder="Some Webpage"
+                    value="{{ redirection.name if redirection else "" }}" required>
+            </label>
+            <label class="w-100 mb-5">
+                Target URL*:
+                <input name="url" class="form-control" type="text" placeholder="https://software-city.org/about"
+                    value="{{ redirection.url if redirection else "" }}" required>
+            </label>
+            <label class="w-100 mb-5">
+                Slug (will be generated if left empty):
+                <input name="slug" class="form-control" type="text" placeholder="rerere"
+                    value="{{ redirection.slug if redirection else "" }}">
+            </label>
+
+            <a href="/" class="btn btn-danger">{{ "Back" if mode == "new" else "Cancel" }}</a>
+            {% if redirection %}
+                <button type="reset" class="btn btn-warning">Reset</button>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">{{ "Create" if mode == "new" else "Save" }}</button>
+        </form>
+    </div>
+{% endblock %}
