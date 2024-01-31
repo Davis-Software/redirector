@@ -9,7 +9,7 @@ from database import database_connection
 
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
-config = Config(os.path.join(working_dir, 'config.ini'))
+config = Config(os.path.join(working_dir, 'config/config.ini'))
 
 app = Flask(__name__)
 db = SQLAlchemy()
