@@ -15,7 +15,7 @@ def check_auth():
 def auth_required(func):
     @wraps(func)
     def check(*args, **kwargs):
-        if not config.get_bool("USE_AUTH") or check_auth():
+        if not check_auth():
             return func(*args, **kwargs)
         return render_template("auth/login.html", redirect=request.path)
 

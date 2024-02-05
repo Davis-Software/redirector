@@ -1,0 +1,16 @@
+{% extends "bases/main_base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/pages/index.css">
+{% endblock %}
+{% block body %}
+    <div id="root">
+        <div class="pt-5 d-flex justify-content-center">
+            <div class="spinner-border"></div>
+        </div>
+    </div>
+
+    {# placed react script here for optimized loading times #}
+    <%= htmlWebpackPlugin.tags.headTags %>
+    <%= htmlWebpackPlugin.tags.bodyTags %>
+{% endblock %}

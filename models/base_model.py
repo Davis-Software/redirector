@@ -1,6 +1,8 @@
 import datetime
 import json
 
+from flask import jsonify
+from sqlalchemy import Column, String, Text
 from sqlalchemy.orm.collections import InstrumentedList
 
 from __init__ import db
@@ -9,15 +11,19 @@ from __init__ import db
 class BaseModel(db.Model):
     __abstract__ = True
 
-    def add(self):
+    def add(self, commit=True):
         db.session.add(self)
-        db.session.commit()
+
+        if commit:
+            self.commit()
+
+    def delete(self, commit=True):
+        db.session.delete(self)
+
+        if commit:
+            self.commit()
 
     def commit(self):
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
         db.session.commit()
 
     def to_dict(self, show: list = None, to_json=True, parent_type = None):
@@ -59,14 +65,14 @@ class BaseModel(db.Model):
         return ret_data
 
     def to_json(self, show: list = None):
-        return self.to_dict(show=show)
+        return jsonify(self.to_dict(show=show))
 
 
 class KeyedValueModel(BaseModel):
     __abstract__ = True
 
-    key = db.Column(db.String(128), nullable=False, primary_key=True)
-    value = db.Column(db.String(2048), nullable=False)
+    key = Column(String(128), nullable=False, primary_key=True)
+    value = Column(Text, nullable=False)
 
     def __init__(self, key: str, value: str):
         self.key = key
@@ -85,6 +91,17 @@ class KeyedValueModel(BaseModel):
         return ret_data
 
     @classmethod
+    def export(cls):
+        return cls.query.all()
+
+    @classmethod
+    def export_to_dict(cls):
+        ret = {}
+        for item in cls.export():
+            ret[item.key] = item.value
+        return ret
+
+    @classmethod
     def set(cls, key: str, value: str):
         item = cls.query.filter_by(key=key).first()
         if item is None:
@@ -96,11 +113,21 @@ class KeyedValueModel(BaseModel):
         return item
 
     @classmethod
-    def get(cls, key: str):
+    def get(cls, key: str, boolean=False):
         item = cls.query.filter_by(key=key).first()
         if item is None:
             return None
-        return item.value
+        return item.value if not boolean else item.value in ["True", "true", "1"]
+
+    @classmethod
+    def delete_key(cls, key, commit=True):
+        item = cls.query.filter_by(key=key).first()
+        if item is None:
+            return None
+        db.session.delete(item)
+        if commit:
+            db.session.commit()
+        return item
 
     @classmethod
     def get_by_key(cls, key: str):
