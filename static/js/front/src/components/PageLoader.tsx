@@ -1,11 +1,11 @@
 import React from "react";
 import PageBase from "../pages/PageBase";
-import SwcLoader from "./SwcLoader";
+import {CircularProgress} from "@mui/material";
 
 function SwcCenteredLoader(props: {className?: string}) {
     return (
         <div className={"d-flex justify-content-center " + props.className}>
-            <SwcLoader />
+            <CircularProgress />
         </div>
     )
 }

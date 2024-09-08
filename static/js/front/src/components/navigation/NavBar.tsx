@@ -4,8 +4,8 @@ import {AppBar, Box, Tab, Tabs, Toolbar} from "@mui/material";
 
 
 interface NavBarProps{
-    value: number,
-    onChange: (num: number) => void
+    value: string,
+    onChange: (num: string) => void
 }
 function NavBar(props: NavBarProps){
     return (
@@ -15,17 +15,14 @@ function NavBar(props: NavBarProps){
                     <Box>
                         <Tabs
                             value={props.value}
-                            onChange={(e: React.SyntheticEvent, v: number) => {
+                            onChange={(e: React.SyntheticEvent, v: string) => {
                                 props.onChange(v)
                             }}
                             variant="scrollable"
                         >
-                            <Tab value={0} label="Overview" />
-                            <Tab value={1} label="Tasks" />
-                            <Tab value={2} label="Services" />
-                            <Tab value={3} label="Backup" />
-                            <Tab value={4} label="Commands & Actions" />
-                            <Tab value={5} label="Settings" />
+                            <Tab value="stats" label="Statistics" />
+                            <Tab value="redirects" label="Redirects" />
+                            <Tab value="settings" label="Settings" />
                         </Tabs>
                     </Box>
                 </AppBar>

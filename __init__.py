@@ -7,8 +7,6 @@ from flask_sqlalchemy import SQLAlchemy
 from database import database_connection
 from utils.scheduling import Scheduler
 
-from models.settings_model import settings_repo
-
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
 config = Config(os.path.join(working_dir, 'config/config.ini'))
@@ -38,8 +36,6 @@ with app.app_context():
     from tools.route_loader import load_routes
 
     load_routes(working_dir, "routes")
-
-    settings_repo.ensure_defaults()
     db.create_all()
 
     scheduler.start()

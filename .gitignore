@@ -1,3 +1,7 @@
 .idea/
 .venv/
 instance/
+static/js/front/node_modules
+static/js/front/package-lock.json
+static/js/bundle
+templates/pages/index.html
