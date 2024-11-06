@@ -1,11 +1,12 @@
 import React from "react";
 import HideOnScroll from "../../utils/HideOnScroll";
 import {AppBar, Box, Tab, Tabs, Toolbar} from "@mui/material";
+import {navigateTo} from "../../utils/navigation";
 
 
 interface NavBarProps{
-    value: string,
-    onChange: (num: string) => void
+    page: string,
+    navItems: [string, string][]
 }
 function NavBar(props: NavBarProps){
     return (
@@ -14,15 +15,19 @@ function NavBar(props: NavBarProps){
                 <AppBar>
                     <Box>
                         <Tabs
-                            value={props.value}
-                            onChange={(e: React.SyntheticEvent, v: string) => {
-                                props.onChange(v)
+                            value={props.page}
+                            onChange={(_, value) => {
+                                navigateTo(value)
                             }}
                             variant="scrollable"
                         >
-                            <Tab value="stats" label="Statistics" />
-                            <Tab value="redirects" label="Redirects" />
-                            <Tab value="settings" label="Settings" />
+                            {props.navItems.map(item => (
+                                <Tab
+                                    key={item[0]}
+                                    label={item[0]}
+                                    value={item[1]}
+                                />
+                            ))}
                         </Tabs>
                     </Box>
                 </AppBar>

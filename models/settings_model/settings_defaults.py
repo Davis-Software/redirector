@@ -1,4 +1,4 @@
-SETTINGS = {
+SETTINGS_DEFAULTS = {
     "app_name": "Redirector",
     "auth": "user",
     "auth_pass": "",

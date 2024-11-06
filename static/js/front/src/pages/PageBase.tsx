@@ -1,5 +1,5 @@
 import React from "react";
-import {Fade} from "@mui/material";
+import {Fade, Paper} from "@mui/material";
 import {TransitionGroup} from "react-transition-group";
 
 interface PageBaseProps {
@@ -9,7 +9,7 @@ function PageBase(props: PageBaseProps) {
     return (
         <TransitionGroup component={null}>
             <Fade>
-                <div>{props.children}</div>
+                <Paper>{props.children}</Paper>
             </Fade>
         </TransitionGroup>
     )

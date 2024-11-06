@@ -4,7 +4,7 @@ module.exports = {
     mode: "development",
     watch: true,
 
-    entry: "./src",
+    entry: "./src/index.tsx",
 
     plugins: [
         new HtmlWebpackPlugin({

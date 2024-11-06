@@ -36,6 +36,6 @@ with app.app_context():
     from tools.route_loader import load_routes
 
     load_routes(working_dir, "routes")
-    db.create_all()
 
+    db.create_all()
     scheduler.start()
