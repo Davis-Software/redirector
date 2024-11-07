@@ -45,7 +45,7 @@ function App(){
                 return <Redirections />
             case "/statistics":
                 return null
-                return <Statistics />
+                // return <Statistics />
             case "/settings":
                 return <Settings />
             default:

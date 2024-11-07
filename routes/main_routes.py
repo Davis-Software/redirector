@@ -7,9 +7,9 @@ from utils.request_codes import RequestCode
 from utils.valid_react_routes import VALID_REACT_ROUTES
 
 
-@app.route("/admin")
+@app.route("/")
 @app.route("/<path:page>")
-# @auth_required
+@auth_required
 def route_index(page=None):
     page_base = page.split("/")[0] if page else "/"
     not_found = page_base not in VALID_REACT_ROUTES or request.args.get("error") == RequestCode.ClientError.NotFound
